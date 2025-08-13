@@ -46,8 +46,8 @@ class MCPClient {
       }
 
       this.transport = new StdioClientTransport({
-        command: process.execPath,
-        args: ["mcp-remote", MCP_SERVER_URL],
+        command: "npx",
+        args: ["-y", "mcp-remote", MCP_SERVER_URL, "--header", "x-cg-pro-api-key: " + COINGECKO_PRO_API_KEY],
         env,
       });
 

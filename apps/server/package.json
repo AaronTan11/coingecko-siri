@@ -13,8 +13,10 @@
     "@anthropic-ai/sdk": "^0.59.0",
     "@hono/node-server": "^1.14.4",
     "@modelcontextprotocol/sdk": "^1.17.2",
+    "ai": "^5.0.12",
     "dotenv": "^17.2.1",
     "hono": "^4.8.2",
+    "mcp-remote": "^0.1.18",
     "zod": "^4.0.2"
   },
   "devDependencies": {
