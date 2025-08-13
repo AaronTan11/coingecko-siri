@@ -47,8 +47,11 @@ class MCPClient {
 
       this.transport = new StdioClientTransport({
         command: "npx",
-        args: ["-y", "mcp-remote", MCP_SERVER_URL, "--header", "x-cg-pro-api-key: " + COINGECKO_PRO_API_KEY],
-        env,
+        args: ["-y", "@coingecko/coingecko-mcp"],
+        env: {
+        "COINGECKO_PRO_API_KEY": COINGECKO_PRO_API_KEY!,
+        "COINGECKO_ENVIRONMENT": "pro"
+      }
       });
 
       await this.mcp.connect(this.transport);

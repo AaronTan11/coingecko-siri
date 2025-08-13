@@ -13,7 +13,6 @@
     "dev:web": "turbo -F web dev",
     "dev:server": "turbo -F server dev"
   },
-  "dependencies": {},
   "devDependencies": {
     "turbo": "^2.5.4"
   },
