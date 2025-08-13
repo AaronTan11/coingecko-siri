@@ -47,7 +47,7 @@ class MCPClient {
 
       this.transport = new StdioClientTransport({
         command: process.execPath,
-        args: ["-y", "mcp-remote", MCP_SERVER_URL],
+        args: ["mcp-remote", MCP_SERVER_URL],
         env,
       });
 
