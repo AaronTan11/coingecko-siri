@@ -107,10 +107,6 @@ class MCPClient {
             arguments: toolArgs,
           });
 
-          finalText.push(
-            `[Calling tool ${toolName} with args ${JSON.stringify(toolArgs)}]`
-          );
-
           messages.push({
             role: "assistant",
             content: [

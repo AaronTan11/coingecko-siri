@@ -47,7 +47,7 @@ app.post("/siri", async (c) => {
     console.log(`Processing Siri query: "${query}"`);
     
     const mcpClient = await getMCPClient();
-    const response = await mcpClient.processQuery(query);
+    const response = await mcpClient.processQuery(query + "please make the response short and concise. if the answer is in a list, please rewrite them in paragraph format so siri can read it out loud.");
     
     return c.json({
       success: true,
