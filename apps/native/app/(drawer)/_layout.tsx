@@ -6,11 +6,21 @@ import { HeaderButton } from "@/components/header-button";
 
 const DrawerLayout = () => {
   return (
-    <Drawer>
+    <Drawer
+      screenOptions={{
+        drawerStyle: {
+          backgroundColor: "hsl(0 0% 100%)",
+        },
+        headerStyle: {
+          backgroundColor: "hsl(0 0% 100%)",
+        },
+        headerTintColor: "hsl(222.2 84% 4.9%)",
+      }}
+    >
       <Drawer.Screen
         name="index"
         options={{
-          headerTitle: "Home",
+          headerTitle: "CoinGecko Siri",
           drawerLabel: "Home",
           drawerIcon: ({ size, color }) => (
             <Ionicons name="home-outline" size={size} color={color} />
@@ -20,10 +30,10 @@ const DrawerLayout = () => {
       <Drawer.Screen
         name="(tabs)"
         options={{
-          headerTitle: "Tabs",
-          drawerLabel: "Tabs",
+          headerTitle: "Crypto Markets",
+          drawerLabel: "Markets",
           drawerIcon: ({ size, color }) => (
-            <MaterialIcons name="border-bottom" size={size} color={color} />
+            <Ionicons name="trending-up" size={size} color={color} />
           ),
           headerRight: () => (
             <Link href="/modal" asChild>

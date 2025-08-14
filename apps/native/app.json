@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "my-better-t-app",
-    "slug": "my-better-t-app",
+    "name": "cgsiri",
+    "slug": "cgsiri",
     "version": "1.0.0",
-    "scheme": "my-better-t-app",
+    "scheme": "cgsiri",
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -12,7 +12,8 @@
     "plugins": [
       "expo-router",
       "expo-secure-store",
-      "expo-web-browser"
+      "expo-web-browser",
+      "@bacons/apple-targets"
     ],
     "experiments": {
       "typedRoutes": true,
@@ -32,14 +33,20 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.amanvarshney01.mybettertapp"
+      "bundleIdentifier": "com.weihup.cgsiri",
+      "entitlements": {
+        "com.apple.security.application-groups": [
+          "group.com.weihup.cgsiri.data"
+        ]
+      },
+      "appleTeamId": "PersonalTeam"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.amanvarshney01.mybettertapp",
+      "package": "com.weihup.cgsiri",
       "edgeToEdgeEnabled": true
     }
   }
