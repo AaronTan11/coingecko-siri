@@ -1,13 +1,18 @@
-import AppIntents
+//
+//  Intent.swift
+//  MyIntentApp
+//
+//  Created by Aaron Tan on 14/08/2025.
+//
+
 import Foundation
+import AppIntents
 
-@main
-struct CoinGeckoAppIntents: AppIntentsExtension {
-}
-
+// Main crypto information intent
+@available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
 struct GetCryptoAnswerIntent: AppIntent {
     static var title: LocalizedStringResource = "Get Crypto Information"
-    static var description: LocalizedStringResource = "Ask about cryptocurrency prices and market information using CoinGecko data"
+    static var description = IntentDescription("Ask about cryptocurrency prices and market information using CoinGecko data")
     static var isDiscoverable: Bool = true
     static var openAppWhenRun: Bool = false
     
@@ -20,9 +25,9 @@ struct GetCryptoAnswerIntent: AppIntent {
         self.query = query
     }
     
-    func perform() async throws -> some IntentResult & ProvidesDialog {
+    func perform() async throws -> some IntentResult & ProvidesDialog & ReturnsValue<String> {
         // Use production URL or fallback to localhost for development
-        let serverURL = ProcessInfo.processInfo.environment["COINGECKO_SERVER_URL"] ?? "http://localhost:3000/siri"
+        let serverURL = ProcessInfo.processInfo.environment["COINGECKO_SERVER_URL"] ?? "http://192.168.1.12:3000/siri"
         
         // Debug logging
         print("🔍 CoinGecko Intent - Starting request to: \(serverURL)")
@@ -36,7 +41,7 @@ struct GetCryptoAnswerIntent: AppIntent {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.timeoutInterval = 60.0 // 60 second timeout for backend processing
+        request.timeoutInterval = 60.0 // 120 second timeout for backend processing
         
         let requestBody = ["query": query]
         request.httpBody = try JSONSerialization.data(withJSONObject: requestBody)
@@ -101,16 +106,17 @@ struct GetCryptoAnswerIntent: AppIntent {
 }
 
 // Quick price check intent for popular cryptocurrencies
+@available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
 struct GetQuickPriceIntent: AppIntent {
     static var title: LocalizedStringResource = "Quick Crypto Price"
-    static var description: LocalizedStringResource = "Get the current price of a popular cryptocurrency"
+    static var description = IntentDescription("Get the current price of a popular cryptocurrency")
     static var isDiscoverable: Bool = true
     static var openAppWhenRun: Bool = false
     
     @Parameter(title: "Cryptocurrency", description: "The cryptocurrency to check")
     var cryptocurrency: CryptocurrencyEntity
     
-    func perform() async throws -> some IntentResult & ProvidesDialog {
+    func perform() async throws -> some IntentResult & ProvidesDialog & ReturnsValue<String> {
         let query = "What is the current price of \(cryptocurrency.name)?"
         
         let intent = GetCryptoAnswerIntent(query: query)
@@ -119,6 +125,7 @@ struct GetQuickPriceIntent: AppIntent {
 }
 
 // Entity for popular cryptocurrencies
+@available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
 struct CryptocurrencyEntity: AppEntity {
     static var typeDisplayRepresentation: TypeDisplayRepresentation = "Cryptocurrency"
     static var defaultQuery = CryptocurrencyQuery()
@@ -143,6 +150,7 @@ struct CryptocurrencyEntity: AppEntity {
     static let polygon = CryptocurrencyEntity(id: "matic-network", name: "Polygon", symbol: "MATIC")
 }
 
+@available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
 struct CryptocurrencyQuery: EntityQuery {
     func entities(for identifiers: [CryptocurrencyEntity.ID]) async throws -> [CryptocurrencyEntity] {
         return popularCryptocurrencies.filter { identifiers.contains($0.id) }
@@ -160,6 +168,7 @@ struct CryptocurrencyQuery: EntityQuery {
     }
 }
 
+// Error handling for crypto-related operations
 enum CryptoError: LocalizedError {
     case invalidURL
     case invalidResponse
@@ -183,7 +192,8 @@ enum CryptoError: LocalizedError {
     }
 }
 
-// App Shortcuts Provider
+// App Shortcuts Provider for predefined Siri shortcuts
+@available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
 struct CoinGeckoAppShortcutsProvider: AppShortcutsProvider {
     @AppShortcutsBuilder
     static var appShortcuts: [AppShortcut] {
@@ -204,7 +214,7 @@ struct CoinGeckoAppShortcutsProvider: AppShortcutsProvider {
         
         // Quick Bitcoin price check
         AppShortcut(
-            intent: GetQuickPriceIntent(),
+            intent: GetCryptoAnswerIntent(query: "What is the current price of Bitcoin?"),
             phrases: [
                 "What's Bitcoin price",
                 "Check Bitcoin price",
@@ -219,7 +229,7 @@ struct CoinGeckoAppShortcutsProvider: AppShortcutsProvider {
         
         // Quick Ethereum price check
         AppShortcut(
-            intent: GetQuickPriceIntent(),
+            intent: GetCryptoAnswerIntent(query: "What is the current price of Ethereum?"),
             phrases: [
                 "What's Ethereum price",
                 "Check Ethereum price", 
@@ -259,5 +269,84 @@ struct CoinGeckoAppShortcutsProvider: AppShortcutsProvider {
             shortTitle: "Market Overview",
             systemImageName: "chart.bar.fill"
         )
+        
+        // Additional popular crypto shortcuts
+        AppShortcut(
+            intent: GetCryptoAnswerIntent(query: "What is the current price of Solana?"),
+            phrases: [
+                "What's Solana price",
+                "Check Solana price",
+                "How much is Solana",
+                "Solana current price",
+                "What's SOL price"
+            ],
+            shortTitle: "Solana Price",
+            systemImageName: "s.circle.fill"
+        )
+        
+        AppShortcut(
+            intent: GetCryptoAnswerIntent(query: "What is the current price of Cardano?"),
+            phrases: [
+                "What's Cardano price",
+                "Check Cardano price",
+                "How much is Cardano",
+                "Cardano current price",
+                "What's ADA price"
+            ],
+            shortTitle: "Cardano Price",
+            systemImageName: "a.circle.fill"
+        )
+        
+        AppShortcut(
+            intent: GetCryptoAnswerIntent(query: "What is the current price of Dogecoin?"),
+            phrases: [
+                "What's Dogecoin price",
+                "Check Dogecoin price",
+                "How much is Dogecoin",
+                "Dogecoin current price",
+                "What's DOGE price"
+            ],
+            shortTitle: "Dogecoin Price",
+            systemImageName: "d.circle.fill"
+        )
+    }
+}
+
+// Legacy intent structure for backward compatibility (keeping your original structure)
+@available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
+struct Intent: AppIntent, CustomIntentMigratedAppIntent, PredictableIntent {
+    static let intentClassName = "IntentIntent"
+
+    static var title: LocalizedStringResource = "Legacy Intent"
+    static var description = IntentDescription("Legacy intent for backward compatibility")
+
+    @Parameter(title: "Parameter")
+    var parameter: String?
+
+    static var parameterSummary: some ParameterSummary {
+        Summary {
+            \.$parameter
+        }
+    }
+
+    static var predictionConfiguration: some IntentPredictionConfiguration {
+        IntentPrediction(parameters: (\.$parameter)) { parameter in
+            DisplayRepresentation(
+                title: LocalizedStringResource(stringLiteral: "Legacy Intent"),
+                subtitle: LocalizedStringResource(stringLiteral: parameter ?? "No parameter")
+            )
+        }
+    }
+
+    func perform() async throws -> some IntentResult {
+        // If parameter is provided, treat it as a crypto query
+        if let query = parameter, !query.isEmpty {
+            let cryptoIntent = GetCryptoAnswerIntent(query: query)
+            _ = try await cryptoIntent.perform()
+            return .result(value: "Processed: \(query)")
+        }
+        
+        // Default behavior
+        return .result(value: "Legacy intent executed")
     }
 }

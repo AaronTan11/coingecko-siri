@@ -1,0 +1,35 @@
+.DS_Store
+
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+*.xcuserdatad
+*.xccheckout
+*.moved-aside
+xcuserdata/
+*.xcscmblueprint
+*.xcscheme
+
+# User settings
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Testing
+*.gcda
+*.gcno
+
+# Dependency manager
+Pods/
+Carthage/Build/
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# IDE
+.vscode/
+.idea/

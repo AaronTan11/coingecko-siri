@@ -134,7 +134,7 @@ class MCPClient {
           });
 
           const nextResponse = await this.anthropic.messages.create({
-            model: "claude-3-5-sonnet-20241022",
+            model: "claude-3-5-haiku-latest",
             max_tokens: 1000,
             messages,
           });

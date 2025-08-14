@@ -37,7 +37,8 @@
       "entitlements": {
         "com.apple.security.application-groups": [
           "group.com.weihup.cgsiri.data"
-        ]
+        ],
+        "com.apple.developer.siri": true
       },
       "appleTeamId": "PersonalTeam"
     },
