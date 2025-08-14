@@ -6,6 +6,9 @@ import type {
 } from "@anthropic-ai/sdk/resources/messages/messages.mjs";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+import { spawn } from "child_process";
+// @ts-ignore - node-fetch types
+import fetch from "node-fetch";
 
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const COINGECKO_PRO_API_KEY = process.env.COINGECKO_PRO_API_KEY;
@@ -45,16 +48,19 @@ class CoinGeckoMCPClient {
     }
 
     try {
-      console.log("🔗 Starting CoinGecko MCP server...");
+      console.log("🔗 Starting CoinGecko MCP server with automated OAuth...");
       
-      // Create stdio transport to connect to remote CoinGecko MCP server
+      // Create stdio transport that will handle OAuth automatically
       this.transport = new StdioClientTransport({
         command: "npx",
-        args: ["mcp-remote",
-        "https://mcp.pro-api.coingecko.com/sse"]
+        args: ["mcp-remote", "https://mcp.pro-api.coingecko.com/sse"],
+        stderr: "pipe" // Pipe stderr so we can handle OAuth
       });
 
-      // Connect to the MCP server
+      // Set up OAuth handling before starting transport
+      this.setupOAuthHandler();
+
+      // Connect to the MCP server (this will start the process)
       await this.client.connect(this.transport);
       console.log("✅ Connected to CoinGecko MCP server");
 
@@ -76,6 +82,98 @@ class CoinGeckoMCPClient {
     } catch (error) {
       console.error("❌ Failed to connect to CoinGecko MCP server:", error);
       this.initPromise = null; // Reset promise so we can retry
+      throw error;
+    }
+  }
+
+  private setupOAuthHandler(): void {
+    if (!this.transport) return;
+    
+    const stderr = this.transport.stderr;
+    if (!stderr) return;
+    
+    // @ts-ignore - setEncoding exists on readable streams
+    stderr.setEncoding('utf8');
+    stderr.on('data', async (data: string) => {
+      console.log(`🔍 MCP Process: ${data.trim()}`);
+      
+      // Extract authorization URL and callback port
+      const authUrlMatch = data.match(/https:\/\/mcp\.pro-api\.coingecko\.com\/authorize\?[^\s]+/);
+      const portMatch = data.match(/callback server running at http:\/\/127\.0\.0\.1:(\d+)/i);
+      
+      if (authUrlMatch && portMatch) {
+        const authUrl = authUrlMatch[0];
+        const callbackPort = portMatch[1];
+        
+        console.log("🔗 Found OAuth URL:", authUrl);
+        console.log("🎯 Found callback port:", callbackPort);
+        
+        try {
+          console.log("🚀 Performing automated OAuth...");
+          await this.performAutomatedAuth(authUrl, callbackPort);
+          console.log("✅ OAuth completed successfully");
+        } catch (error) {
+          console.error("❌ OAuth failed:", error);
+        }
+      }
+    });
+  }
+
+  private async performAutomatedAuth(authUrl: string, callbackPort: string): Promise<void> {
+    try {
+      // Extract parameters from the auth URL
+      const url = new URL(authUrl);
+      const clientId = url.searchParams.get('client_id');
+      const codeChallenge = url.searchParams.get('code_challenge');
+      const codeChallengeMethod = url.searchParams.get('code_challenge_method');
+      const redirectUri = url.searchParams.get('redirect_uri');
+      const state = url.searchParams.get('state');
+      
+      console.log("🔐 Authenticating with CoinGecko Pro API...");
+      
+      // Make authorization request with Pro API key
+      const authResponse = await fetch(authUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${COINGECKO_PRO_API_KEY}`
+        },
+        body: JSON.stringify({
+          client_id: clientId,
+          code_challenge: codeChallenge,
+          code_challenge_method: codeChallengeMethod,
+          redirect_uri: redirectUri,
+          state: state,
+          response_type: 'code'
+        })
+      });
+      
+      if (!authResponse.ok) {
+        throw new Error(`Auth request failed: ${authResponse.status} ${authResponse.statusText}`);
+      }
+      
+      const authData = await authResponse.json() as any;
+      const authCode = authData.code || authData.authorization_code;
+      
+      if (!authCode) {
+        throw new Error("No authorization code received from CoinGecko");
+      }
+      
+      console.log("🎟️ Received authorization code, sending to callback...");
+      
+      // Send the code to the callback server
+      const callbackResponse = await fetch(`http://127.0.0.1:${callbackPort}/oauth/callback?code=${authCode}&state=${state}`, {
+        method: 'GET'
+      });
+      
+      if (!callbackResponse.ok) {
+        throw new Error(`Callback failed: ${callbackResponse.status} ${callbackResponse.statusText}`);
+      }
+      
+      console.log("✅ Authorization callback completed");
+      
+    } catch (error) {
+      console.error("❌ Error in automated auth:", error);
       throw error;
     }
   }
