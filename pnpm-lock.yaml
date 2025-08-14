@@ -111,6 +111,9 @@ importers:
       '@anthropic-ai/sdk':
         specifier: ^0.59.0
         version: 0.59.0
+      '@coingecko/coingecko-mcp':
+        specifier: ^1.11.2
+        version: 1.11.2
       '@hono/node-server':
         specifier: ^1.14.4
         version: 1.18.2(hono@4.9.1)
@@ -771,6 +774,16 @@ packages:
 
   '@bacons/xcode@1.0.0-alpha.24':
     resolution: {integrity: sha512-RaYUNsGBJVp0t2vgXaT4L668WIvbhtdl1JFJHedPkebIPR6h/+E2Kq32O49t+8f4LUPW9UF4CfXBrDc+XdXUUQ==}
+
+  '@cloudflare/cabidela@0.2.4':
+    resolution: {integrity: sha512-u/1OwwqfcMvjmUFOcb6QtFzVVGpncHJxwl254wjzp0JC5CUlBkV6r5BbRrHI5ZYJEAgu8NeeorirxngmMFPZjQ==}
+
+  '@coingecko/coingecko-mcp@1.11.2':
+    resolution: {integrity: sha512-4kAKhY7Z7IcDq57v25rTYbPI2WyvxaeNh+cjALpKOiU2tLxxUcs4DKdi1R2h/w6SDSUrUdsB34GtTFQ9R7TjQQ==}
+    hasBin: true
+
+  '@coingecko/coingecko-typescript@1.11.2':
+    resolution: {integrity: sha512-nP5cZSHgLGhZAHD1o9qMUJeb/ZOii04NPfVJ3cxZf3RCwG5kx/DWUkZYlROFSXfSkGQddWGcOkdPykWY+JBH+Q==}
 
   '@egjs/hammerjs@2.0.17':
     resolution: {integrity: sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A==}
@@ -3669,6 +3682,10 @@ packages:
     resolution: {integrity: sha512-twQoecYPiVA5K/h6SxtORw/Bs3ar+mLUtoPSc7iMXzQzK8d7eJ/R09wmTwAjiamETn1cXYPGfNnu7DMoHgu12w==}
     hasBin: true
 
+  jq-web@https://release-assets.githubusercontent.com/github-production-release-asset/1019454912/d48e6db2-22f2-41ab-ae23-376269e9ccf5?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-08-14T17%3A16%3A00Z&rscd=attachment%3B+filename%3Djq-web.tar.gz&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-08-14T16%3A15%3A28Z&ske=2025-08-14T17%3A16%3A00Z&sks=b&skv=2018-11-09&sig=WKde8Qd2A94JtdFcEwnaq%2BjMAu4okiTLjq5ApxiwrUs%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc1NTE4ODc3NCwibmJmIjoxNzU1MTg4NDc0LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.Bt7FtDm_wlisjt608Sr0ETeoPvZwMAKlawoGk1sv_vQ&response-content-disposition=attachment%3B%20filename%3Djq-web.tar.gz&response-content-type=application%2Foctet-stream:
+    resolution: {tarball: https://release-assets.githubusercontent.com/github-production-release-asset/1019454912/d48e6db2-22f2-41ab-ae23-376269e9ccf5?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-08-14T17%3A16%3A00Z&rscd=attachment%3B+filename%3Djq-web.tar.gz&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-08-14T16%3A15%3A28Z&ske=2025-08-14T17%3A16%3A00Z&sks=b&skv=2018-11-09&sig=WKde8Qd2A94JtdFcEwnaq%2BjMAu4okiTLjq5ApxiwrUs%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc1NTE4ODc3NCwibmJmIjoxNzU1MTg4NDc0LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.Bt7FtDm_wlisjt608Sr0ETeoPvZwMAKlawoGk1sv_vQ&response-content-disposition=attachment%3B%20filename%3Djq-web.tar.gz&response-content-type=application%2Foctet-stream}
+    version: 0.8.2
+
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -6073,6 +6090,22 @@ snapshots:
       uuid: 8.3.2
     transitivePeerDependencies:
       - supports-color
+
+  '@cloudflare/cabidela@0.2.4': {}
+
+  '@coingecko/coingecko-mcp@1.11.2':
+    dependencies:
+      '@cloudflare/cabidela': 0.2.4
+      '@coingecko/coingecko-typescript': 1.11.2
+      '@modelcontextprotocol/sdk': 1.17.2
+      jq-web: https://release-assets.githubusercontent.com/github-production-release-asset/1019454912/d48e6db2-22f2-41ab-ae23-376269e9ccf5?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-08-14T17%3A16%3A00Z&rscd=attachment%3B+filename%3Djq-web.tar.gz&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-08-14T16%3A15%3A28Z&ske=2025-08-14T17%3A16%3A00Z&sks=b&skv=2018-11-09&sig=WKde8Qd2A94JtdFcEwnaq%2BjMAu4okiTLjq5ApxiwrUs%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc1NTE4ODc3NCwibmJmIjoxNzU1MTg4NDc0LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.Bt7FtDm_wlisjt608Sr0ETeoPvZwMAKlawoGk1sv_vQ&response-content-disposition=attachment%3B%20filename%3Djq-web.tar.gz&response-content-type=application%2Foctet-stream
+      yargs: 17.7.2
+      zod: 3.25.76
+      zod-to-json-schema: 3.24.6(zod@3.25.76)
+    transitivePeerDependencies:
+      - supports-color
+
+  '@coingecko/coingecko-typescript@1.11.2': {}
 
   '@egjs/hammerjs@2.0.17':
     dependencies:
@@ -9370,6 +9403,8 @@ snapshots:
   jiti@1.21.7: {}
 
   jiti@2.5.1: {}
+
+  jq-web@https://release-assets.githubusercontent.com/github-production-release-asset/1019454912/d48e6db2-22f2-41ab-ae23-376269e9ccf5?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-08-14T17%3A16%3A00Z&rscd=attachment%3B+filename%3Djq-web.tar.gz&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-08-14T16%3A15%3A28Z&ske=2025-08-14T17%3A16%3A00Z&sks=b&skv=2018-11-09&sig=WKde8Qd2A94JtdFcEwnaq%2BjMAu4okiTLjq5ApxiwrUs%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc1NTE4ODc3NCwibmJmIjoxNzU1MTg4NDc0LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.Bt7FtDm_wlisjt608Sr0ETeoPvZwMAKlawoGk1sv_vQ&response-content-disposition=attachment%3B%20filename%3Djq-web.tar.gz&response-content-type=application%2Foctet-stream: {}
 
   js-tokens@4.0.0: {}
 
