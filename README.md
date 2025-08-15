@@ -5,8 +5,7 @@ Ask Siri about crypto prices and get real-time data from CoinGecko - all in unde
 **🌐 Just a landing page for you to look at:** [https://coingecko-siri-web.vercel.app/](https://coingecko-siri-web.vercel.app/)
 
 ## 🎥 Demo Video
-
-<div style="position: relative; padding-bottom: 62.5%; height: 0;"><iframe src="https://www.loom.com/embed/cc91e96c7eba4e8a9e6786038bbe92de?sid=81f055b6-1839-420b-9501-0e12eb3f1588" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+https://www.loom.com/share/cc91e96c7eba4e8a9e6786038bbe92de?sid=9916f774-077d-4fa8-a032-5c07b7eaf9ae
 
 ## ✨ What This Does
 
