@@ -27,7 +27,7 @@ struct GetCryptoAnswerIntent: AppIntent {
     
     func perform() async throws -> some IntentResult & ProvidesDialog & ReturnsValue<String> {
         // Use production URL or fallback to localhost for development
-        let serverURL = ProcessInfo.processInfo.environment["COINGECKO_SERVER_URL"] ?? "http://192.168.1.12:3000/siri"
+        let serverURL = ProcessInfo.processInfo.environment["COINGECKO_SERVER_URL"] ?? "http://192.168.1.12:3000/siri-remote"
         
         // Debug logging
         print("🔍 CoinGecko Intent - Starting request to: \(serverURL)")
