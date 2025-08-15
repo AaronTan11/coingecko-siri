@@ -68,6 +68,25 @@ function HomeComponent() {
         </div>
       </section>
 
+      {/* Demo Video Section */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="mb-8 text-center text-3xl font-bold">See It In Action</h2>
+          <div className="mx-auto max-w-3xl">
+            <div className="overflow-hidden rounded-xl border bg-card shadow-lg">
+              <div style={{position: 'relative', paddingBottom: '62.5%', height: 0}}>
+                <iframe 
+                  src="https://www.loom.com/embed/cc91e96c7eba4e8a9e6786038bbe92de?sid=81f055b6-1839-420b-9501-0e12eb3f1588" 
+                  frameBorder="0" 
+                  allowFullScreen
+                  style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Demo Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="mx-auto max-w-4xl">
